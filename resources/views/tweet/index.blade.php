@@ -10,7 +10,7 @@
         <tbody>
             @foreach($tweets as $tweet)
             <tr>
-                <td>{{ $tweet }}</td>
+                <td>{{ $tweet->body }}</td>
             </tr>
             @endforeach
         </tbody>
