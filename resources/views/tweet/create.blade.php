@@ -6,6 +6,8 @@
 </head>
 <body>
 <form action="{!! url('tweet') !!}}" method="post">
+    {!! csrf_field() !!}
+
     <label for="body">ツイート本文：</label>
     <input type="text" name="body"/>
 
