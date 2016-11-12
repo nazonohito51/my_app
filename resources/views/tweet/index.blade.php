@@ -8,10 +8,11 @@
     <a href="{!! url('/tweet/create') !!}">新しいツイートを投稿する</a>
     <table>
         <tbody>
+            @foreach($tweets as $tweet)
             <tr>
-                <td>まだツイートはありません</td>
-                <td></td>
+                <td>{{ $tweet }}</td>
             </tr>
+            @endforeach
         </tbody>
     </table>
 </body>
