@@ -40,7 +40,11 @@ class TweetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tweet = new \App\Tweet();
+        $tweet->body = $request->body;
+        $tweet->save();
+
+        return redirect('tweet');
     }
 
     /**
