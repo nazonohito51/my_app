@@ -29,7 +29,7 @@ class TweetController extends Controller
      */
     public function create()
     {
-        //
+        return view('tweet.create');
     }
 
     /**
