@@ -15,6 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('tweet', 'TweetController@index');
-Route::get('tweet/create', 'TweetController@create');
-Route::post('tweet', 'TweetController@store');
+Route::get('tweet', 'TweetController@index')->name('tweet_index');
+Route::get('tweet/create', 'TweetController@create')->name('tweet_create');
+Route::post('tweet', 'TweetController@store')->name('tweet_store');

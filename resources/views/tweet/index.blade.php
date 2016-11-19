@@ -12,7 +12,7 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-                <a href="{!! url('/tweet/create') !!}" class="btn btn-primary">新しいツイートを投稿する</a>
+                <a href="{!! route('tweet_create') !!}" class="btn btn-primary">新しいツイートを投稿する</a>
             </div>
             <div class="col-md-10">
                 <table class="table">
