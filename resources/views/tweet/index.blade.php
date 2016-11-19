@@ -20,6 +20,7 @@
                         @foreach($tweets as $tweet)
                         <tr>
                             <td>{{ $tweet->body }}</td>
+                            <td class="text-right">{{ $tweet->created_at }}</td>
                         </tr>
                         @endforeach
                     </tbody>
