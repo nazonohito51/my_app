@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Validator;
 
 class TweetController extends Controller
 {
@@ -40,8 +41,20 @@ class TweetController extends Controller
      */
     public function store(Request $request)
     {
+        // バリデーション処理を行うオブジェクト
+        $validator = Validator::make($request->all(), [
+            'body' => ['required', 'max:255']
+        ]);
+        // バリデーション結果の取得はpasses/fails
+        if ($validator->fails()) {
+            return redirect()               // リダイレクトをする
+                ->back()                    // リダイレクト先は一つ前のURL
+                ->withErrors($validator)    // エラーメッセージをフラッシュデータとして残す
+                ->withInput();              // パラメータをフラッシュデータとして残す
+        }
+
         $tweet = new \App\Tweet();
-        $tweet->body = $request->body;
+        $tweet->body = $request->input('body');
         $tweet->save();
 
         return redirect('tweet');

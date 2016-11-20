@@ -15,7 +15,7 @@
             <div class="col-md-12">
                 {!! csrf_field() !!}
 
-                <input type="text" name="body" class="form-control" placeholder="ツイート本文を入力してください。"/>
+                <input type="text" name="body" class="form-control" placeholder="ツイート本文を入力してください。" value="{{ old('body') }}"/>
                 <button type="submit" class="btn btn-primary">投稿する</button>
             </div>
         </div>
