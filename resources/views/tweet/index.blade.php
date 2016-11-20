@@ -16,6 +16,9 @@
                     <td>
                         <a href="{!! route('tweet_show', ['id' => $tweet->id]) !!}">{{ $tweet->body }}</a>
                     </td>
+                    <td class="text-right">
+                        <a href="{!! route('tweet_edit', ['id' => $tweet->id]) !!}" class="btn btn-primary">編集</a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
