@@ -10,9 +10,7 @@
     <div class="page-header">
         <h1>@yield('page-header')</h1>
     </div>
-    <div class="row">
-        @yield('content')
-    </div>
+    @yield('content')
 </div>
 </body>
 </html>
