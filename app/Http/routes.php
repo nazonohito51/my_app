@@ -15,10 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('tweet', 'TweetController@index')->name('tweet_index');
-Route::get('tweet/create', 'TweetController@create')->name('tweet_create');
-Route::post('tweet', 'TweetController@store')->name('tweet_store');
-Route::get('tweet/{id}', 'TweetController@show')->name('tweet_show');
-Route::get('tweet/{id}/edit', 'TweetController@edit')->name('tweet_edit');
-Route::match(['put', 'patch'], 'tweet/{id}/edit', 'TweetController@update')->name('tweet_update');
-Route::delete('tweet/{id}', 'TweetController@destroy')->name('tweet_destroy');
+Route::get('tweet', 'TweetController@index')->name('tweet.index');
+Route::get('tweet/create', 'TweetController@create')->name('tweet.create');
+Route::post('tweet', 'TweetController@store')->name('tweet.store');
+Route::get('tweet/{id}', 'TweetController@show')->name('tweet.show');
+Route::get('tweet/{id}/edit', 'TweetController@edit')->name('tweet.edit');
+Route::match(['put', 'patch'], 'tweet/{id}/edit', 'TweetController@update')->name('tweet.update');
+Route::delete('tweet/{id}', 'TweetController@destroy')->name('tweet.destroy');

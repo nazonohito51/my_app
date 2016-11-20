@@ -10,7 +10,7 @@
     @endif
     <div class="row">
         <div class="col-md-12">
-            <form action="{{ route('tweet_update', ['id' => $tweet->id]) }}" method="post">
+            <form action="{{ route('tweet.update', ['id' => $tweet->id]) }}" method="post">
                 <input type="hidden" name="_method" value="PUT">
                 {!! csrf_field() !!}
 

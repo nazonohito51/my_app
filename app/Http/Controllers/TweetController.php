@@ -58,7 +58,7 @@ class TweetController extends Controller
         $tweet->body = $request->input('body');
         $tweet->save();
 
-        return redirect()->route('tweet_index');
+        return redirect()->route('tweet.index');
     }
 
     /**
@@ -109,7 +109,7 @@ class TweetController extends Controller
         $tweet->body = $request->input('body');
         $tweet->save();
 
-        return redirect()->route('tweet_index');
+        return redirect()->route('tweet.index');
     }
 
     /**
@@ -123,6 +123,6 @@ class TweetController extends Controller
         $tweet = Tweet::findOrFail($id);
         $tweet->delete();
 
-        return redirect()->route('tweet_index');
+        return redirect()->route('tweet.index');
     }
 }
