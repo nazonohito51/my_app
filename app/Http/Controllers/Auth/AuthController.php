@@ -32,6 +32,7 @@ class AuthController extends Controller
     {
         $this->redirectPath = route('tweet.index');
         $this->loginPath = route('tweet.index');
+        $this->redirectAfterLogout = route('tweet.index');
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
