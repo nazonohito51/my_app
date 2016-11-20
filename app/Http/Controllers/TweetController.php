@@ -100,6 +100,10 @@ class TweetController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'body' => ['required', 'max:255']
+        ]);
+
         $tweet = Tweet::findOrFail($id);
 
         $tweet->body = $request->input('body');
