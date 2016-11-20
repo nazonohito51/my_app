@@ -21,3 +21,4 @@ Route::post('tweet', 'TweetController@store')->name('tweet_store');
 Route::get('tweet/{id}', 'TweetController@show')->name('tweet_show');
 Route::get('tweet/{id}/edit', 'TweetController@edit')->name('tweet_edit');
 Route::match(['put', 'patch'], 'tweet/{id}/edit', 'TweetController@update')->name('tweet_update');
+Route::delete('tweet/{id}', 'TweetController@destroy')->name('tweet_destroy');

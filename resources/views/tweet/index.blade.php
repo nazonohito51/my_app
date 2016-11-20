@@ -20,6 +20,13 @@
                         <td class="text-right">
                             <a href="{!! route('tweet_edit', ['id' => $tweet->id]) !!}" class="btn btn-primary">編集</a>
                         </td>
+                        <td class="text-right">
+                            <form action="{{ route('tweet_destroy', ['id' => $tweet->id]) }}" method="post">
+                                <input type="hidden" name="_method" value="DELETE">
+                                {!! csrf_field() !!}
+                                <button type="submit" class="btn btn-danger">削除</button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
