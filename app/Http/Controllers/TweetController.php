@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Validator;
+use App\Tweet;
 
 class TweetController extends Controller
 {
@@ -17,7 +18,7 @@ class TweetController extends Controller
      */
     public function index()
     {
-        $tweets = \App\Tweet::all();
+        $tweets = Tweet::all();
         return view('tweet.index', [
             'tweets' => $tweets,
         ]);
