@@ -15,4 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('auth/register', 'Auth\AuthController@getRegister')->name('auth.get_register');
+Route::post('auth/register', 'Auth\AuthController@postRegister')->name('auth.post_register');
+
 Route::resource('tweet', 'TweetController');
