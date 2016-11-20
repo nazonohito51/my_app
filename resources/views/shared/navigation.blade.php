@@ -5,7 +5,11 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a href="{{ route('auth.get_login') }}">ログイン</a>
+                @if(Auth::check())
+                    <a href="{{ route('auth.get_logout') }}">ログアウト</a>
+                @else
+                    <a href="{{ route('auth.get_login') }}">ログイン</a>
+                @endif
             </li>
         </ul>
     </div>
