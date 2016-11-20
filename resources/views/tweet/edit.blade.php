@@ -7,7 +7,8 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <form action="" method="post">
+            <form action="{{ route('tweet_update', ['id' => $tweet->id]) }}" method="post">
+                <input type="hidden" name="_method" value="PUT">
                 {!! csrf_field() !!}
 
                 <input type="text" name="body" class="form-control" placeholder="ツイート本文を入力してください。" value="{{ $tweet->body }}"/>

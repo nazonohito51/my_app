@@ -58,7 +58,7 @@ class TweetController extends Controller
         $tweet->body = $request->input('body');
         $tweet->save();
 
-        return redirect('tweet');
+        return redirect()->route('tweet_index');
     }
 
     /**
@@ -100,7 +100,12 @@ class TweetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tweet = Tweet::findOrFail($id);
+
+        $tweet->body = $request->input('body');
+        $tweet->save();
+
+        return redirect()->route('tweet_index');
     }
 
     /**
