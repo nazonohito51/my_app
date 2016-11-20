@@ -69,7 +69,11 @@ class TweetController extends Controller
      */
     public function show($id)
     {
-        //
+        $tweet = Tweet::findOrFail($id);
+
+        return view('tweet.show', [
+            'tweet' => $tweet,
+        ]);
     }
 
     /**
