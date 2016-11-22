@@ -18,7 +18,7 @@ class TweetController extends Controller
      */
     public function index()
     {
-        $tweets = Tweet::all();
+        $tweets = Tweet::paginate(10);
         return view('tweet.index', [
             'tweets' => $tweets,
         ]);

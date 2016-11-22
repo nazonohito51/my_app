@@ -31,6 +31,7 @@
                 @endforeach
                 </tbody>
             </table>
+            {!! $tweets->render(); !!}
         </div>
     </div>
 @stop
