@@ -4,11 +4,17 @@
             <a href="{{ route('tweet.index') }}" class="navbar-brand">マイアプリ</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
-            <li>
                 @if(Auth::check())
-                    <a href="{{ route('auth.get_logout') }}">ログアウト</a>
+                    <li>
+                        <a href="{{ route('auth.get_logout') }}">ログアウト</a>
+                    </li>
                 @else
-                    <a href="{{ route('auth.get_login') }}">ログイン</a>
+                    <li>
+                        <a href="{{ route('auth.get_register') }}">ユーザ新規登録</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('auth.get_login') }}">ログイン</a>
+                    </li>
                 @endif
             </li>
         </ul>
