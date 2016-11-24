@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddUserIdColumnInTweets extends Migration
+class AddForeignKeyColumnInTweets extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddUserIdColumnInTweets extends Migration
     public function up()
     {
         Schema::table('tweets', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned()->after('id');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -25,7 +25,7 @@ class AddUserIdColumnInTweets extends Migration
     public function down()
     {
         Schema::table('tweets', function (Blueprint $table) {
-            $table->dropColumn('user_id');
+            $table->dropForeign(['user_id']);
         });
     }
 }
