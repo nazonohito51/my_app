@@ -36,4 +36,13 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    /**
+     * ツイートを取得
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tweets()
+    {
+        return $this->hasMany('App\Tweet');
+    }
 }
