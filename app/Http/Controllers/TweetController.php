@@ -42,17 +42,9 @@ class TweetController extends Controller
      */
     public function store(Request $request)
     {
-        // バリデーション処理を行うオブジェクト
-        $validator = Validator::make($request->all(), [
+        $this->validate($request, [
             'body' => ['required', 'max:255']
         ]);
-        // バリデーション結果の取得はpasses/fails
-        if ($validator->fails()) {
-            return redirect()               // リダイレクトをする
-                ->back()                    // リダイレクト先は一つ前のURL
-                ->withErrors($validator)    // エラーメッセージをフラッシュデータとして残す
-                ->withInput();              // パラメータをフラッシュデータとして残す
-        }
 
         $tweet = new \App\Tweet();
         $tweet->body = $request->input('body');
