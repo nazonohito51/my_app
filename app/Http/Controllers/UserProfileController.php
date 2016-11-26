@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\User;
+use App\UserProfile;
 
 class UserProfileController extends Controller
 {
@@ -17,7 +19,10 @@ class UserProfileController extends Controller
      */
     public function show($id)
     {
-        dd('hoge-');
+        $user_profile = User::findOrFail($id)->user_profile;
+        return view('user_profile.show', [
+            'user_profile' => $user_profile,
+        ]);
     }
 
     /**
