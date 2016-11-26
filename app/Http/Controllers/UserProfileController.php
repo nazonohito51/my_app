@@ -33,7 +33,10 @@ class UserProfileController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user_profile = User::findOrFail($id)->user_profile;
+        return view('user_profile.edit', [
+            'user_profile' => $user_profile,
+        ]);
     }
 
     /**
