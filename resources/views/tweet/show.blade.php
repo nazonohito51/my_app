@@ -12,5 +12,13 @@
             <h3>投稿日時</h3>
             <p>{{ $tweet->created_at }}</p>
         </div>
+        @if(auth()->check())
+            <a href="{!! route('tweet.edit', ['id' => $tweet->id]) !!}" class="btn btn-primary">編集</a>
+            <form action="{{ route('tweet.destroy', ['id' => $tweet->id]) }}" method="post">
+                <input type="hidden" name="_method" value="DELETE">
+                {!! csrf_field() !!}
+                <button type="submit" class="btn btn-danger">削除</button>
+            </form>
+        @endif
     </div>
 @stop
