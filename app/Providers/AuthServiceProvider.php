@@ -30,10 +30,10 @@ class AuthServiceProvider extends ServiceProvider
             return true;
         });
         $gate->define('update-tweet', function ($user, $tweet) {
-            return $user->id == $tweet->id;
+            return $user->id == $tweet->user_id;
         });
         $gate->define('delete-tweet', function ($user, $tweet) {
-            return $user->id == $tweet->id;
+            return $user->id == $tweet->user_id;
         });
     }
 }
