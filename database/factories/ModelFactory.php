@@ -28,6 +28,13 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\UserProfile::class, function (Faker\Generator $faker) {
+    return [
+        'introduction' => $faker->text(),
+        'birthday' => $faker->date('Y-m-d'),
+    ];
+});
+
 $factory->define(App\Tweet::class, function (Faker\Generator $faker) {
     return [
         'body' => $faker->text(),

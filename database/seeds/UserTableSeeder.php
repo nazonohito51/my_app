@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use App\UserProfile;
 
 class UserTableSeeder extends Seeder
 {
@@ -21,10 +22,12 @@ class UserTableSeeder extends Seeder
         ];
         
         foreach ($users_info as $name => $email) {
-            factory(User::class)->create([
+            $user = factory(User::class)->create([
                 'name' => $name,
                 'email' => $email,
             ]);
+
+            $user->user_profile()->save(factory(UserProfile::class)->make());
         }
 
         $this->call(TweetTableSeeder::class);
