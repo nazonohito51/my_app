@@ -10,7 +10,7 @@
     @endif
     <div class="row">
         <div class="col-md-12">
-            <form action="" method="post">
+            <form action="{{ route('user_profile.update', ['user' => $user_profile->user->id]) }}" method="post">
                 <input type="hidden" name="_method" value="PUT">
                 {!! csrf_field() !!}
 

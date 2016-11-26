@@ -25,3 +25,4 @@ Route::resource('tweet', 'TweetController');
 
 Route::get('user/{user}/profile', 'UserProfileController@show')->name('user_profile.show');
 Route::get('user/{user}/profile/edit', 'UserProfileController@edit')->name('user_profile.edit');
+Route::match(['put', 'patch'], 'user/{user}/profile', 'UserProfileController@update')->name('user_profile.update');

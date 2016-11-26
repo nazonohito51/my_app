@@ -48,6 +48,18 @@ class UserProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'introduction' => ['max:255'],
+            'birthday' => ['date']
+        ]);
+
+        $user_profile = User::findOrFail($id)->user_profile;
+        $this->authorize('update-user_profile', $user_profile);
+
+        $user_profile->introduction = $request->input('introduction');
+        $user_profile->birthday = $request->input('birthday');
+        $user_profile->save();
+
+        return redirect()->route('user_profile.show', $user_profile->user->id);
     }
 }
