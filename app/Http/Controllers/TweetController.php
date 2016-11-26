@@ -18,7 +18,7 @@ class TweetController extends Controller
      */
     public function index()
     {
-        $tweets = Tweet::paginate(10);
+        $tweets = Tweet::orderBy('created_at', 'desc')->paginate(10);
         return view('tweet.index', [
             'tweets' => $tweets,
         ]);
