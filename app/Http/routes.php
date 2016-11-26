@@ -22,3 +22,5 @@ Route::get('auth/register', 'Auth\AuthController@getRegister')->name('auth.get_r
 Route::post('auth/register', 'Auth\AuthController@postRegister')->name('auth.post_register');
 
 Route::resource('tweet', 'TweetController');
+
+Route::get('user/{user}/profile', 'UserProfileController@show')->name('user_profile.show');

@@ -9,7 +9,9 @@
         <div class="col-md-2">
             @can('create-tweet')
                 <p>
-                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>{{ Auth::user()->name }}
+                    <a href="{!! route('user_profile.show', ['user' => Auth::user()->id]) !!}">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>{{ Auth::user()->name }}
+                    </a>
                 </p>
                 <p>
                     <a href="{!! route('tweet.create') !!}" class="btn btn-primary">新しいツイートを投稿する</a>
@@ -22,7 +24,7 @@
                     @foreach($tweets as $tweet)
                         <tr>
                             <td>
-                                {{ $tweet->user->name }}: {{ $tweet->body }}
+                                <a href="{!! route('user_profile.show', ['user' => $tweet->user->id]) !!}">{{ $tweet->user->name }}</a>: {{ $tweet->body }}
                             </td>
                             <td class="text-right">
                                 <a href="{!! route('tweet.show', ['id' => $tweet->id]) !!}" class="btn btn-primary">詳細</a>
