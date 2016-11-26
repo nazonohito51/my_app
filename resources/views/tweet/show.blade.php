@@ -9,6 +9,8 @@
         <div class="col-md-12">
             <h3>ツイート内容</h3>
             <p>{{ $tweet->body }}</p>
+            <h3>投稿者</h3>
+            <p>{{ $tweet->user->name }}</p>
             <h3>投稿日時</h3>
             <p>{{ $tweet->created_at }}</p>
         </div>
