@@ -8,7 +8,12 @@
     <div class="row">
         <div class="col-md-2">
             @if(auth()->check())
-                <a href="{!! route('tweet.create') !!}" class="btn btn-primary">新しいツイートを投稿する</a>
+                <p>
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>{{ auth()->user()->name }}
+                </p>
+                <p>
+                    <a href="{!! route('tweet.create') !!}" class="btn btn-primary">新しいツイートを投稿する</a>
+                </p>
             @endif
         </div>
         <div class="col-md-10">
