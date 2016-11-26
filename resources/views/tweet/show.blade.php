@@ -14,7 +14,7 @@
             <h3>投稿日時</h3>
             <p>{{ $tweet->created_at }}</p>
         </div>
-        @if(Auth::check())
+        @if(Auth::user()->id == $tweet->user_id)
             <a href="{!! route('tweet.edit', ['id' => $tweet->id]) !!}" class="btn btn-primary">編集</a>
             <form action="{{ route('tweet.destroy', ['id' => $tweet->id]) }}" method="post">
                 <input type="hidden" name="_method" value="DELETE">
