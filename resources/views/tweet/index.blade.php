@@ -15,7 +15,7 @@
                 @foreach($tweets as $tweet)
                     <tr>
                         <td>
-                            <a href="{!! route('tweet.show', ['id' => $tweet->id]) !!}">{{ $tweet->body }}</a>
+                            {{ $tweet->user->name }}: <a href="{!! route('tweet.show', ['id' => $tweet->id]) !!}">{{ $tweet->body }}</a>
                         </td>
                         <td class="text-right">
                             <a href="{!! route('tweet.edit', ['id' => $tweet->id]) !!}" class="btn btn-primary">編集</a>
@@ -31,7 +31,7 @@
                 @endforeach
                 </tbody>
             </table>
-            {!! $tweets->render(); !!}
+            {!! $tweets->render() !!}
         </div>
     </div>
 @stop
