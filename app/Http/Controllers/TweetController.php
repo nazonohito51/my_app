@@ -48,6 +48,7 @@ class TweetController extends Controller
 
         $tweet = new \App\Tweet();
         $tweet->body = $request->input('body');
+        $tweet->user_id = $request->user()->id;
         $tweet->save();
 
         return redirect()->route('tweet.index');
