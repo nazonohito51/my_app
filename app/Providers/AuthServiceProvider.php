@@ -26,6 +26,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
 
-        //
+        $gate->define('create-tweet', function ($user) {
+            return true;
+        });
+        $gate->define('update-tweet', function ($user, $tweet) {
+            return $user->id == $tweet->id;
+        });
+        $gate->define('delete-tweet', function ($user, $tweet) {
+            return $user->id == $tweet->id;
+        });
     }
 }

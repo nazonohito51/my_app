@@ -13,7 +13,6 @@ class TweetController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     }
 
     /**
@@ -50,6 +49,7 @@ class TweetController extends Controller
         $this->validate($request, [
             'body' => ['required', 'max:255']
         ]);
+        $this->authorize('create-tweet');
 
         $tweet = new \App\Tweet();
         $tweet->body = $request->input('body');
@@ -103,6 +103,7 @@ class TweetController extends Controller
         ]);
 
         $tweet = Tweet::findOrFail($id);
+        $this->authorize('update-tweet', $tweet);
 
         $tweet->body = $request->input('body');
         $tweet->save();
@@ -119,6 +120,8 @@ class TweetController extends Controller
     public function destroy($id)
     {
         $tweet = Tweet::findOrFail($id);
+        $this->authorize('delete-tweet', $tweet);
+
         $tweet->delete();
 
         return redirect()->route('tweet.index');
