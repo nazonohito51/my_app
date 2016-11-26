@@ -18,13 +18,13 @@
                             {{ $tweet->user->name }}: <a href="{!! route('tweet.show', ['id' => $tweet->id]) !!}">{{ $tweet->body }}</a>
                         </td>
                         <td class="text-right">
-                            <a href="{!! route('tweet.edit', ['id' => $tweet->id]) !!}" class="btn btn-primary">編集</a>
+                            <a href="{!! route('tweet.edit', ['id' => $tweet->id]) !!}" class="btn btn-primary btn-sm">編集</a>
                         </td>
                         <td class="text-right">
                             <form action="{{ route('tweet.destroy', ['id' => $tweet->id]) }}" method="post">
                                 <input type="hidden" name="_method" value="DELETE">
                                 {!! csrf_field() !!}
-                                <button type="submit" class="btn btn-danger">削除</button>
+                                <button type="submit" class="btn btn-danger btn-sm">削除</button>
                             </form>
                         </td>
                     </tr>
