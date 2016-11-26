@@ -14,5 +14,8 @@
             <h3>誕生日</h3>
             <p>{{ $user_profile->birthday }}</p>
         </div>
+        @can('update-user_profile', $user_profile)
+            <a href="{!! route('user_profile.edit', ['id' => $user_profile->id]) !!}" class="btn btn-primary">編集</a>
+        @endcan
     </div>
 @stop

@@ -35,5 +35,9 @@ class AuthServiceProvider extends ServiceProvider
         $gate->define('delete-tweet', function ($user, $tweet) {
             return $user->id == $tweet->user_id;
         });
+
+        $gate->define('update-user_profile', function ($user, $user_profile) {
+            return $user->id == $user_profile->user_id;
+        });
     }
 }
