@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Validator;
+use Auth;
 use App\Tweet;
 
 class TweetController extends Controller
@@ -54,7 +55,7 @@ class TweetController extends Controller
 
         $tweet = new \App\Tweet();
         $tweet->body = $request->input('body');
-        $tweet->user_id = $request->user()->id;
+        $tweet->user_id = Auth::user()->id;
         $tweet->save();
 
         return redirect()->route('tweet.index');
