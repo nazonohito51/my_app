@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Tweet;
+use App\User;
 
 class TweetTableSeeder extends Seeder
 {
@@ -12,6 +13,12 @@ class TweetTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Tweet::class, 50)->create();
+        $users = User::all();
+        
+        foreach ($users as $user) {
+            factory(Tweet::class, 20)->create([
+                'user_id' => $user->id,
+            ]);
+        }
     }
 }

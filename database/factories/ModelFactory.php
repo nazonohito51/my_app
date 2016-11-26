@@ -20,6 +20,14 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\User::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name(),
+        'email' => $faker->email(),
+        'password' => bcrypt('test'),
+    ];
+});
+
 $factory->define(App\Tweet::class, function (Faker\Generator $faker) {
     return [
         'body' => $faker->text(),
