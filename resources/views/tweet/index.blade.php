@@ -7,7 +7,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-2">
-            @can('create-tweet', $tweet)
+            @can('create-tweet')
                 <p>
                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>{{ Auth::user()->name }}
                 </p>
