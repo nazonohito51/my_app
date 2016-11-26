@@ -45,4 +45,13 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->hasMany('App\Tweet');
     }
+
+    /**
+     * ユーザプロフィールを取得
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user_profile()
+    {
+        return $this->hasOne('App\UserProfile');
+    }
 }
