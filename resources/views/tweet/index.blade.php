@@ -7,9 +7,9 @@
 @section('content')
     <div class="row">
         <div class="col-md-2">
-            @if(auth()->check())
+            @if(Auth::check())
                 <p>
-                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>{{ auth()->user()->name }}
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>{{ Auth::user()->name }}
                 </p>
                 <p>
                     <a href="{!! route('tweet.create') !!}" class="btn btn-primary">新しいツイートを投稿する</a>

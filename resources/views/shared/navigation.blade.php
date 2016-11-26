@@ -4,7 +4,7 @@
             <a href="{{ route('tweet.index') }}" class="navbar-brand">マイアプリ</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
-            @if(auth()->check())
+            @if(Auth::check())
                 <li>
                     <a href="{{ route('auth.get_logout') }}">ログアウト</a>
                 </li>
