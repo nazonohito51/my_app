@@ -22,6 +22,25 @@
                 </div>
 
                 <div class="form-group row">
+                    <label class="col-xs-2 col-form-label">ハッシュタグ１</label>
+                    <div class="col-xs-3">
+                        <input type="text" name="hash_tag[]" class="form-control" placeholder="ハッシュタグを入力してください。" value="{{ old('hash_tag.0', $tweet->hash_tags[0]->name) }}"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xs-2 col-form-label">ハッシュタグ２</label>
+                    <div class="col-xs-3">
+                        <input type="text" name="hash_tag[]" class="form-control" placeholder="ハッシュタグを入力してください。" value="{{ old('hash_tag.1', $tweet->hash_tags[1]->name) }}"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xs-2 col-form-label">ハッシュタグ３</label>
+                    <div class="col-xs-3">
+                        <input type="text" name="hash_tag[]" class="form-control" placeholder="ハッシュタグを入力してください。" value="{{ old('hash_tag.2', $tweet->hash_tags[2]->name) }}"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <div class="col-xs-offset-2 col-xs-10">
                         <button type="submit" class="btn btn-primary">投稿する</button>
                     </div>
