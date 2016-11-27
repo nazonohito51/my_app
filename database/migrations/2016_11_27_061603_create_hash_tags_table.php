@@ -14,7 +14,7 @@ class CreateHashTagsTable extends Migration
     {
         Schema::create('hash_tags', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->timestamps();
         });
 
@@ -36,7 +36,7 @@ class CreateHashTagsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('hash_tags');
         Schema::drop('hash_tag_tweet');
+        Schema::drop('hash_tags');
     }
 }
