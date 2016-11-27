@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Validator;
 use Auth;
 use App\Tweet;
+use App\HashTag;
 
 class TweetController extends Controller
 {
@@ -22,7 +23,7 @@ class TweetController extends Controller
             if (!is_array($value)) {
                 return false;
             }
-            
+
             // $valueにはPOSTされたパラメータが入っている。今回の場合はこんな中身。
             // array (size=3)
             //   0 => string '1234567890' (length=10)
@@ -82,6 +83,18 @@ class TweetController extends Controller
         $tweet->user_id = Auth::user()->id;
         $tweet->save();
 
+        $hash_tag_ids = [];
+        foreach ($request->input('hash_tag') as $name) {
+            if (!empty($name)) {
+                $hash_tag = HashTag::firstOrCreate([
+                    'name' => $name,
+                ]);
+                $hash_tag_ids[] = $hash_tag->id;
+            }
+        }
+
+        $tweet->hash_tags()->sync($hash_tag_ids);
+
         return redirect()->route('tweet.index');
     }
 
@@ -134,6 +147,18 @@ class TweetController extends Controller
 
         $tweet->body = $request->input('body');
         $tweet->save();
+
+        $hash_tag_ids = [];
+        foreach ($request->input('hash_tag') as $name) {
+            if (!empty($name)) {
+                $hash_tag = HashTag::firstOrCreate([
+                    'name' => $name,
+                ]);
+                $hash_tag_ids[] = $hash_tag->id;
+            }
+        }
+
+        $tweet->hash_tags()->sync($hash_tag_ids);
 
         return redirect()->route('tweet.index');
     }
