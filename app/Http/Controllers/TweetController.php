@@ -15,6 +15,29 @@ class TweetController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+
+        // 各配列要素が文字列であることを確認するバリデーション
+        Validator::extend('hash_tag_array', function ($attribute, $value, $parameters, $validator) {
+            // arrayでなければバリデーションエラー
+            if (!is_array($value)) {
+                return false;
+            }
+            
+            // $valueにはPOSTされたパラメータが入っている。今回の場合はこんな中身。
+            // array (size=3)
+            //   0 => string '1234567890' (length=10)
+            //   1 => string '' (length=0)
+            //   2 => string 'a' (length=1)
+            foreach ($value as $string) {
+                // 255文字以下の文字列以外の配列要素があればバリデーションエラー
+                if (!(is_string($string) && mb_strlen($string) <= 255)) {
+                    return false;
+                }
+            }
+
+            // 全ての配列要素が文字列だと分かったのでバリデーションエラー無し
+            return true;
+        });
     }
 
     /**
@@ -49,7 +72,8 @@ class TweetController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'body' => ['required', 'max:255']
+            'body' => ['required', 'max:255'],
+            'hash_tag' => ['required', 'array', 'hash_tag_array'],    // 全て空でもformのサイズ分のarrayとして必ず来る
         ]);
         $this->authorize('create-tweet');
 
@@ -101,7 +125,8 @@ class TweetController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'body' => ['required', 'max:255']
+            'body' => ['required', 'max:255'],
+            'hash_tag' => ['required', 'array', 'hash_tag_array'],    // 全て空でもformのサイズ分のarrayとして必ず来る
         ]);
 
         $tweet = Tweet::findOrFail($id);

@@ -92,6 +92,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'hash_tag' => [
+            'hash_tag_array' => 'ハッシュタグは255文字以下で入力してください。',
+        ]
     ],
 
     /*
