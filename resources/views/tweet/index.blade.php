@@ -24,7 +24,25 @@
                     @foreach($tweets as $tweet)
                         <tr>
                             <td>
-                                <a href="{!! route('user_profile.show', ['user' => $tweet->user->id]) !!}">{{ $tweet->user->name }}</a>: {{ $tweet->body }}
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <a href="{!! route('user_profile.show', ['user' => $tweet->user->id]) !!}">{{ $tweet->user->name }}</a>: {{ $tweet->body }}
+                                    </li>
+                                    @if(count($tweet->hash_tags) >0)
+                                        <li>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
+                                                </li>
+                                                @foreach($tweet->hash_tags as $hash_tag)
+                                                    <li>
+                                                        <span class="label label-info">{{ $hash_tag->name }}</span>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
+                                    @endif
+                                </ul>
                             </td>
                             <td class="text-right">
                                 <a href="{!! route('tweet.show', ['id' => $tweet->id]) !!}" class="btn btn-primary">詳細</a>
