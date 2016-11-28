@@ -9,6 +9,19 @@
         <div class="col-md-12">
             <h3>ツイート内容</h3>
             <p>{{ $tweet->body }}</p>
+            <h3>ハッシュタグ</h3>
+            <p>
+                <ul class="list-inline">
+                    <li>
+                        <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
+                    </li>
+                    @foreach($tweet->hash_tags as $hash_tag)
+                        <li>
+                            <span class="label label-info">{{ $hash_tag->name }}</span>
+                        </li>
+                    @endforeach
+                </ul>
+            </p>
             <h3>投稿者</h3>
             <p>{{ $tweet->user->name }}</p>
             <h3>投稿日時</h3>
