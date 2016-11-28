@@ -36,7 +36,9 @@
                                                 </li>
                                                 @foreach($tweet->hash_tags as $hash_tag)
                                                     <li>
-                                                        <span class="label label-info">{{ $hash_tag->name }}</span>
+                                                        <a href="{!! route('tweet.get_hash_tag', ['hash_tag' => $hash_tag->id]) !!}">
+                                                            <span class="label label-info">{{ $hash_tag->name }}</span>
+                                                        </a>
                                                     </li>
                                                 @endforeach
                                             </ul>

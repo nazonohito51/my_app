@@ -22,7 +22,8 @@ Route::get('auth/register', 'Auth\AuthController@getRegister')->name('auth.get_r
 Route::post('auth/register', 'Auth\AuthController@postRegister')->name('auth.post_register');
 
 Route::resource('tweet', 'TweetController');
-Route::get('user/{user}', 'TweetController@getUser')->name('user_profile.get_user');
+Route::get('user/{user}', 'TweetController@getUser')->name('tweet.get_user');
+Route::get('hash_tag/{hash_tag}', 'TweetController@getHashTag')->name('tweet.get_hash_tag');
 
 Route::get('user/{user}/profile', 'UserProfileController@show')->name('user_profile.show');
 Route::get('user/{user}/profile/edit', 'UserProfileController@edit')->name('user_profile.edit');

@@ -192,7 +192,17 @@ class TweetController extends Controller
 
     public function getUser($user_id)
     {
-        $tweets = Tweet::where(['user_id' => $user_id])->paginate(10);
+        $tweets = Tweet::where(['user_id' => $user_id])->orderBy('created_at', 'desc')->paginate(10);
+        return view('tweet.index', [
+            'tweets' => $tweets,
+        ]);
+    }
+
+    public function getHashTag($hash_tag_id)
+    {
+        $tweets = Tweet::whereHas('hash_tags', function ($query) use ($hash_tag_id) {
+            $query->where('hash_tag_id', $hash_tag_id);
+        })->orderBy('created_at', 'desc')->paginate(10);
         return view('tweet.index', [
             'tweets' => $tweets,
         ]);
