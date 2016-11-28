@@ -16,29 +16,6 @@ class TweetController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
-
-        // 各配列要素が文字列であることを確認するバリデーション
-        Validator::extend('hash_tag_array', function ($attribute, $value, $parameters, $validator) {
-            // arrayでなければバリデーションエラー
-            if (!is_array($value)) {
-                return false;
-            }
-
-            // $valueにはPOSTされたパラメータが入っている。今回の場合はこんな中身。
-            // array (size=3)
-            //   0 => string '1234567890' (length=10)
-            //   1 => string '' (length=0)
-            //   2 => string 'a' (length=1)
-            foreach ($value as $string) {
-                // 255文字以下の文字列以外の配列要素があればバリデーションエラー
-                if (!(is_string($string) && mb_strlen($string) <= 255)) {
-                    return false;
-                }
-            }
-
-            // 全ての配列要素が文字列だと分かったのでバリデーションエラー無し
-            return true;
-        });
     }
 
     /**
@@ -72,25 +49,42 @@ class TweetController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        // ex:
+        //   preg_split('/\s+/', '   tag1 tag2 tag3    tag4  ', -1, PREG_SPLIT_NO_EMPTY)
+        //   == ['tag1', 'tag2, 'tag3', 'tag4'];
+        $inputs = [
+            'body' => $request->input('body'),
+            'hash_tags' => preg_split('/\s+/', $request->input('hash_tags'), -1, PREG_SPLIT_NO_EMPTY),
+        ];
+
+        $rule = [
             'body' => ['required', 'max:255'],
-            'hash_tag' => ['required', 'array', 'hash_tag_array'],    // 全て空でもformのサイズ分のarrayとして必ず来る
-        ]);
+            'hash_tags' => 'array',
+        ];
+        foreach (range(0, count($inputs['hash_tags'])) as $num) {
+            $rule['hash_tags.' . $num] = ['required', 'string', 'max:255'];
+        }
+
+        $validator = Validator::make($inputs, $rule);
+        if ($validator->failed()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
         $this->authorize('create-tweet');
 
         $tweet = new \App\Tweet();
-        $tweet->body = $request->input('body');
+        $tweet->body = $inputs['body'];
         $tweet->user_id = Auth::user()->id;
         $tweet->save();
 
         $hash_tag_ids = [];
-        foreach ($request->input('hash_tag') as $name) {
-            if (!empty($name)) {
-                $hash_tag = HashTag::firstOrCreate([
-                    'name' => $name,
-                ]);
-                $hash_tag_ids[] = $hash_tag->id;
-            }
+        foreach ($inputs['hash_tags'] as $name) {
+            $hash_tag = HashTag::firstOrCreate([
+                'name' => $name,
+            ]);
+            $hash_tag_ids[] = $hash_tag->id;
         }
 
         $tweet->hash_tags()->sync($hash_tag_ids);
@@ -137,25 +131,42 @@ class TweetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
+        // ex:
+        //   preg_split('/\s+/', '   tag1 tag2 tag3    tag4  ', -1, PREG_SPLIT_NO_EMPTY)
+        //   == ['tag1', 'tag2, 'tag3', 'tag4'];
+        $inputs = [
+            'body' => $request->input('body'),
+            'hash_tags' => preg_split('/\s+/', $request->input('hash_tags'), -1, PREG_SPLIT_NO_EMPTY),
+        ];
+
+        $rule = [
             'body' => ['required', 'max:255'],
-            'hash_tag' => ['required', 'array', 'hash_tag_array'],    // 全て空でもformのサイズ分のarrayとして必ず来る
-        ]);
+            'hash_tags' => 'array',
+        ];
+        foreach (range(0, count($inputs['hash_tags'])) as $num) {
+            $rule['hash_tags.' . $num] = ['required', 'string', 'max:255'];
+        }
+
+        $validator = Validator::make($inputs, $rule);
+        if ($validator->failed()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         $tweet = Tweet::findOrFail($id);
         $this->authorize('update-tweet', $tweet);
 
-        $tweet->body = $request->input('body');
+        $tweet->body = $inputs['body'];
         $tweet->save();
 
         $hash_tag_ids = [];
-        foreach ($request->input('hash_tag') as $name) {
-            if (!empty($name)) {
-                $hash_tag = HashTag::firstOrCreate([
-                    'name' => $name,
-                ]);
-                $hash_tag_ids[] = $hash_tag->id;
-            }
+        foreach ($inputs['hash_tags'] as $name) {
+            $hash_tag = HashTag::firstOrCreate([
+                'name' => $name,
+            ]);
+            $hash_tag_ids[] = $hash_tag->id;
         }
 
         $tweet->hash_tags()->sync($hash_tag_ids);
