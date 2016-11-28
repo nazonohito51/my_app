@@ -26,7 +26,7 @@
                             <td>
                                 <ul class="list-unstyled">
                                     <li>
-                                        <a href="{!! route('user_profile.show', ['user' => $tweet->user->id]) !!}">{{ $tweet->user->name }}</a>: {{ $tweet->body }}
+                                        <a href="{!! route('tweet.get_user', ['user' => $tweet->user->id]) !!}">{{ $tweet->user->name }}</a>: {{ $tweet->body }}
                                     </li>
                                     @if(count($tweet->hash_tags) >0)
                                         <li>

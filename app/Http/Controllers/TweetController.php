@@ -189,4 +189,12 @@ class TweetController extends Controller
 
         return redirect()->route('tweet.index');
     }
+
+    public function getUser($user_id)
+    {
+        $tweets = Tweet::where(['user_id' => $user_id])->paginate(10);
+        return view('tweet.index', [
+            'tweets' => $tweets,
+        ]);
+    }
 }
